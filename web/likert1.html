@@ -17,17 +17,92 @@
 		<script type='text/javascript' src='/eel.js'></script>
 		<script type='text/javascript'>
 		</script>
-
-	
-			<md-tabs class="md-primary" md-alignment="fixed">
+<md-tabs class="md-primary" md-alignment="fixed">
 				<md-tab id="main" md-label="Main">
 
+					<div>
+					<md-table @md-selected="onSelect" v-model="table_obj"  md-card md-fixed-header>
+						<md-table-toolbar>
+							<h1 class="md-title">Objectives</h1>
+							<md-button class="md-raised md-primary" @click="send(2,serv_existentes)">Save</md-button>
+							
+							<md-button class="md-raised md-primary" @click="change('existentes')">New</md-button>
+						</md-table-toolbar>
+
+						<md-table-row md-selectable="multiple" md-auto-select slot="md-table-row" slot-scope="{ item }">
+							<md-table-cell md-label="Category">{{ item.category }}</md-table-cell>
+							<md-table-cell md-label="Objective">{{ item.name }}</md-table-cell>
+							<md-table-cell md-label="1" md-numeric>{{ item.crit1 }}</md-table-cell>
+							<md-table-cell md-label="2" md-numeric>{{ item.crit2 }}</md-table-cell>
+							<md-table-cell md-label="3" md-numeric>{{ item.crit3 }}</md-table-cell>
+							<md-table-cell md-label="4" md-numeric>{{ item.crit4 }}</md-table-cell>
+							<md-table-cell md-label="5" md-numeric>{{ item.crit5 }}</md-table-cell>
+													
+						</md-table-row>
+					</md-table>
+						<h3>Judgement:
+							<span><br>1: No Significance </span>
+							<span><br>2: Low Significance </span>
+							<span><br>3: Mild Significance </span>
+							<span><br>4: High Significance </span>
+							<span><br>5: Very High Significance </span>
+
+						</h3>
+					</div>
+
+
+
+					<div>
+					<md-table @md-selected="onSelect" v-model="table_crit"  md-card md-fixed-header>
+						<md-table-toolbar>
+							<h1 class="md-title">Criterion</h1>
+							<md-button class="md-raised md-primary" @click="send(2,serv_existentes)">Save</md-button>
+							
+							<md-button class="md-raised md-primary" @click="change('existentes')">New</md-button>
+						</md-table-toolbar>
+
+						<md-table-row md-selectable="multiple" md-auto-select slot="md-table-row" slot-scope="{ item }">
+							<md-table-cell md-label="Criterion">{{ item.name }}</md-table-cell>
+							<md-table-cell md-label="1" md-numeric>{{ item.crit1 }}</md-table-cell>
+							<md-table-cell md-label="2" md-numeric>{{ item.crit2 }}</md-table-cell>
+							<md-table-cell md-label="3" md-numeric>{{ item.crit3 }}</md-table-cell>
+							<md-table-cell md-label="4" md-numeric>{{ item.crit4 }}</md-table-cell>
+							<md-table-cell md-label="5" md-numeric>{{ item.crit5 }}</md-table-cell>
+													
+						</md-table-row>
+					</md-table>
+						<h3>Judgement:
+							<span><br>1: No Significance </span>
+							<span><br>2: Low Significance </span>
+							<span><br>3: Mild Significance </span>
+							<span><br>4: High Significance </span>
+							<span><br>5: Very High Significance </span>
+
+						</h3>
+					</div>
+
+
 				</md-tab>
-				<md-tab id="results" md-label="Results" @click="load_table">
+				<md-tab id="results" md-label="Results">
+
+
+
+
+				</md-tab>
+				<md-tab id="summary" md-label="Summary">
+
+
+
+
+				</md-tab>
+				<md-tab id="info" md-label="Info">
+
+
+
 
 				</md-tab>
 			</md-tabs>
-		
+				
 
 
 		<script src="node_modules/vue/dist/vue.min.js"></script>
