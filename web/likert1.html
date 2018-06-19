@@ -104,13 +104,20 @@
 			</md-tabs>
 				
 
+		<md-dialog :md-active.sync="select" :md-click-outside-to-close="false" >
+			<md-tabs md-dynamic-height class="md-primary" md-alignment="fixed">
+				<md-tab md-label="Create">
+			
+					<h2 style="text-align: center;">Create new {{ select }}</h2>
+				</md-tab>
+			</md-tabs>
+		</md-dialog>
+
 
 		<script src="node_modules/vue/dist/vue.min.js"></script>
 		<script src="node_modules/vue-material/dist/vue-material.min.js"></script>
 
 		<script src="node_modules/app.js"></script>
-
-
 
 	</div>
 </body>
