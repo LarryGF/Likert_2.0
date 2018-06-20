@@ -29,6 +29,7 @@
 				<md-tab id="main" md-label="Main">
 
 					<div>
+						{{ selected }}
 						<md-field>
 							<label>Users interviewed (amount)</label>
 							<md-input v-model="users" type="number"></md-input>
@@ -42,7 +43,7 @@
 						<md-table-toolbar>
 							<h1 class="md-title">Objectives</h1>
 							<span>
-							<md-button class="md-raised md-accent" @click="send(2,serv_existentes)">Delete</md-button>
+							<md-button class="md-raised md-accent" @click="delitems(selected,last_id)">Delete</md-button>
 							<md-button class="md-raised md-primary" @click="save_to_file('objective',table_obj,last_id)">Save</md-button>
 							<md-button class="md-raised md-primary" @click="select='Objective'">New</md-button>
 						</span>
@@ -76,7 +77,7 @@
 						<md-table-toolbar>
 							<h1 class="md-title">Criterion</h1>
 							<span>
-							<md-button  class="md-raised md-accent" @click="send(2,serv_existentes)">Delete</md-button>
+							<md-button  class="md-raised md-accent" @click="delitems(selected,last_id)">Delete</md-button>
 							<md-button class="md-raised md-primary" @click="save_to_file('criterion',table_crit,last_id)">Save</md-button>
 							<md-button class="md-raised md-primary" @click="select='Criterion'">New</md-button>
 							</span>

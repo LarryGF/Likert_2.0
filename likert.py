@@ -35,48 +35,74 @@ def load():
 	file = os.path.join(data_dir,'objective.json')
 	try:
 		file = open(file)
+		dic = json.load(file)
+		file.close()
+		lista = []
+		for fila in dic.keys():
+			lista.append(dic[fila])
+		list_to_send.append(lista)
 	except:
-		return [[],[],0]
-	dic = json.load(file)
-	file.close()
-	lista = []
-	for fila in dic.keys():
-		lista.append(dic[fila])
-	list_to_send.append(lista)
+		list_to_send.append([])
 
 
 	file = os.path.join(data_dir,'criterion.json')
 	try:
 		file = open(file)
+		dic = json.load(file)
+		file.close()
+		lista = []
+		for fila in dic.keys():
+			lista.append(dic[fila])
+		list_to_send.append(lista)
 	except:
-		return [[],[],0]
+		list_to_send.append([])
 	
-	dic = json.load(file)
-	file.close()
-	lista = []
-	for fila in dic.keys():
-		lista.append(dic[fila])
-	list_to_send.append(lista)
 
 
 	file = os.path.join(data_dir,'last.json')
-	file = open(file)
-	dic = json.load(file)
-	file.close()
-	last_id = dic['last_id']
-	list_to_send.append(last_id)
-
+	try:
+		file = open(file)
+		dic = json.load(file)
+		file.close()
+		last_id = dic['last_id']
+		list_to_send.append(last_id)
+	except:
+		list_to_send.append(0)
 	return list_to_send
 
+@eel.expose
+def delitems(lista,last_id):
+	file = os.path.join(data_dir,'objective.json')
+	try:
+		file = open(file)
+	except:
+		return 'You must add some data before you can delete it :)'
+	objective = json.load(file)
+	file.close()
 
-	# with open('{}.json'.format(table)) as f:
-	# 	dic = json.load(f)
-	# 	lista = []
-	# 	for fila in sorted(dic.keys()):  ####ordenar las filas al ingresarlas a la lista
-	# 		lista.append(dic[fila])
-	# print(lista)
-	# return lista
+	file = os.path.join(data_dir,'criterion.json')
+	try:
+		file = open(file)
+	except:
+		return 'You must add some data before you can delete it :)'
+	
+	criterion = json.load(file)
+	file.close()
+
+	
+	if str(lista[0]['id']) in objective.keys():
+		print(lista)
+		for dic in lista:
+			print(dic['id'])
+			objective.pop(str(dic['id']))
+
+		return objective
 
 
+	elif str(lista[0]['id']) in criterion.keys():
+		print('criterion')
+
+	else:
+		return 'It seems like I screwed up, send me an email so I can fix it'
 
 eel.start('likert1.html')
