@@ -84,10 +84,36 @@
 
 				</md-tab>
 				<md-tab id="results" md-label="Results">
+				<div>
+					<md-table @md-selected="onSelect" v-model="likert_table_obj" md-sort="significance" md-card md-fixed-header>
+						<md-table-toolbar>
+							<h1 class="md-title">Likert's Results: Objectives</h1>
+							
+						</md-table-toolbar>
 
+						<md-table-row md-selectable="multiple" md-auto-select slot="md-table-row" slot-scope="{ item }">
+							<md-table-cell md-label="Significance" md-sort-by="significance">{{ item.significance }}</md-table-cell>
+							<md-table-cell md-label="Objective">{{ item.name }}</md-table-cell>
+							<md-table-cell md-label="Category">{{ item.category }}</md-table-cell>
+													
+						</md-table-row>
+					</md-table>
+				</div>
+				<br>
+				<div>
+					<md-table @md-selected="onSelect" v-model="likert_table_crit" md-sort="significance" md-card md-fixed-header>
+						<md-table-toolbar>
+							<h1 class="md-title">Likert's Results: Criterion</h1>
+							
+						</md-table-toolbar>
 
-
-
+						<md-table-row md-selectable="multiple" md-auto-select slot="md-table-row" slot-scope="{ item }">
+							<md-table-cell md-label="Significance" md-sort-by="significance">{{ item.significance }}</md-table-cell>
+							<md-table-cell md-label="Objective">{{ item.name }}</md-table-cell>
+													
+						</md-table-row>
+					</md-table>
+				</div>	
 				</md-tab>
 				<md-tab id="summary" md-label="Summary">
 
@@ -104,13 +130,56 @@
 			</md-tabs>
 				
 
-		<md-dialog :md-active.sync="select" :md-click-outside-to-close="false" >
+		<md-dialog :md-active.sync="select" :md-click-outside-to-close="false" style="width: 30%">
+			<md-dialog-content>
 			<md-tabs md-dynamic-height class="md-primary" md-alignment="fixed">
 				<md-tab md-label="Create">
-			
 					<h2 style="text-align: center;">Create new {{ select }}</h2>
-				</md-tab>
+
+					<md-field>
+						<label v-if="select == 'Objective'">Objective</label>
+						<label v-if="select == 'Criterion'">Criterion</label>
+						<md-textarea v-model="name" md-autogrow></md-textarea>
+					</md-field>
+
+					<md-field v-if="select == 'Objective'">
+						<label>Category</label>
+						<md-input v-model="category" ></md-input>
+					</md-field>
+					
+					<md-field>
+						<label>No Significance (number of users)</label>
+						<md-input v-model="crit1" type="number"></md-input>
+					</md-field>
+					
+					<md-field>
+						<label>Low Significance (number of users)</label>
+						<md-input v-model="crit2" type="number"></md-input>
+					</md-field>
+			
+					<md-field>
+						<label>Mild Significance (number of users)</label>
+						<md-input v-model="crit3" type="number"></md-input>
+					</md-field>
+			
+					<md-field>
+						<label>High Significance (number of users)</label>
+						<md-input v-model="crit4" type="number"></md-input>
+					</md-field>
+			
+					<md-field>
+						<label>Very High Significance (number of users)</label>
+						<md-input v-model="crit5" type="number"></md-input>
+					</md-field>
+
+					<br><br>
+					<span>
+					 <md-button class="md-raised md-primary">New</md-button>
+					  <md-button class="md-raised md-accent">Close</md-button>
+					</span>
+					</md-tab>
 			</md-tabs>
+			</md-dialog-content>
 		</md-dialog>
 
 
