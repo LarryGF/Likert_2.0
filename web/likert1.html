@@ -18,8 +18,61 @@
 		<script type='text/javascript'>
 			
 		</script>
-<md-tabs class="md-primary" md-alignment="fixed" @md-changed="load('objective','criterion')">
+<md-tabs class="md-primary" md-alignment="fixed" @md-changed="load('objective','criterion')" :md-active-tab.sync="step">
 				<md-tab id="info" md-label="Info">
+					<h1 style="text-align: center;">Welcome to Likert 2.0</h1>
+					<br>
+					<p> As you may know, this software is intended to aid you in the tedious task of processing all the results from the different polls that you may have to do when you try to design a <b>Private Cloud</b> with support for Infrastructure as a Service (<b>IaaS</b>). It has been designed with productivity in mind, so it might take some time to get used to the workflow, but as soon as you get the hang of it we know you'll find it quite useful.</p>
+
+					<p> It's still a work in progress so it'll probably have some <b>bugs</b> here and there, please, feel free to contact us if you find one, or if you have any sugestionss, or if you think this software is cool :)</p>
+
+					<br>
+					<h2 >Architecture</h2>
+
+					<p>The software is divided in three sections:</p>
+					<ul>
+						<li>Main</li>
+						<p> Here you must insert the results of your polls, there are two tables, one for the <b>Objectives</b> and one for the <b>Criterions</b>. After you've finished filling the tables you must press the <b>'Check & Run'</b> button so the software can process all your data, and redirect you automatically to the next tab.</p>
+
+						<br>
+
+						<li>Results</li>
+						<p>Your automatically generated results will be shown here, they'll be the product of applying the Likert's Scale to all the data you entered in the previous section. It has two tables, one for the <b>Objectives</b> and one for the <b>Criterions</b>. They'll show you which aspects are the most significant according to the people you questioned.</p>
+
+						<br>
+
+						<li>Summary</li>
+						<p> Finally, in this sections we'll show you at a bigger scale in which aspects you should focus the design of your cloud.</p>
+
+					</ul> 
+
+					<br>
+
+					<h2>Usage</h2>
+					<p> It's pretty simple to use:</p>
+					<ul>
+						<li>Click in <b>'New'</b> to add a new element</li>
+						<li>Fill in the data</li>
+						<li>Click <b>'Check & Run'...</b></li>
+						<li>And that's all! Your results are ready!</li>
+					</ul>
+
+					<p> As we said before, it has been designed with productivity in mind (at least, <b>our</b> idea of productivity). So there are a few things you may want to know...</p>
+
+					<p> In the <b>Main</b> tab, when you're adding a new element, the software brings up a dialog to ask for your data. After you click the <b>'New'</b> button the dialog won't close until you hit the <b>'Close'</b> button. We made it this way so you don't have to be clicking over and over the same button to open the dialog. We changed the way the <b>Significance</b> values are showed in the tables to make them easier to read and give you more room to view the actual text you typed, below each table is a mapping that pairs each showed number with its respective <b>Significance</b> value (incidentally, these numbers also correspond to the weight of each attribute in te <b>Likert's Scale</b>.</p>
+
+					<p> You can run the software just by doing these things, but it wouldn't be very smart to be re-typing every time you use it, so if you click the <b>'Save'</b> button all the data you entered will be backed up to disk for further use. If you don't do it often you might loose a fair amount of work, so we recommend you to save frequently.</p>
+
+					<p> In case you made a typo, or entered the wrong data you can select those items by clicking on the checkboxes (or even on the row itself, whichever is easier for you :), and the press the <b>'Delete'</b> button. It's worth mentioning that these deletions aren't permanent unless you say so, if you think you selected the wrong row, as long as you didn't click the <b>'Save'</b> button again, you're good to go! You just have to go to another tab and go back again to the <b>'Main'</b> tab and the original data will be back up again. By the way, you can only delete data from a table if the last element you selected is from that table, for example: if you have several rows selected from both the <b>Objectives</b> and the <b>Criterion</b> tables, when you press the <b>'Delete'</b> button, the elements that will be deleted will be the ones belonging to the table of the last element clicked, this is half good half bug, but we're really confortable with it so we aren't planning on changing it for the moment, if many people complain about this, we'll begin to work on it in future updates.</p>
+
+					<p> Last but not least, after you press the <b>'Check & Run'</b> button the software will perform a very basic check to see if all the data you passed was valid (it essentially checks if the amount of users you introduced in each row of the tables is bigger than the total of users interviewed, it's the only logical thing we can do to check the veracity of the data, because we already make sure that you can only fill the important fields with the appropriate data types). If a row doesn't pass this test, it will automatically be deleted and you'll be asked if you wanna continue doing the test or want to re-type the missing rows.<p>
+
+					<p>Finally, thanks for taking all the hard work of reading this guide, and we hope this software helps you do your job better, click on the button below to start.</p>
+
+
+
+					<md-button style="margin-left:45% " class="md-raised md-accent" @click="step='main'">START</md-button>
+
 
 
 
