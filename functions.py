@@ -178,23 +178,35 @@ def func_check(users,table_obj,table_crit,last_id):
 			list_crit.append(row)
 		else:
 			pass
-	if len(list_obj) != 0:
+
+	
+	if len(list_obj) != 0 and len(list_crit) == 0:
 		var = func_del(list_obj,last_id)
 		var = var[1]
 		print(var)
 		mistake=True
-	elif len(list_crit) != 0:
+		
+	elif len(list_crit) != 0 and len(list_obj) == 0:
 		var2 = func_del(list_crit,last_id)
 		var2 = var2[1]
 		print(var2)
+		mistake=True
+		
+
+	elif len(list_obj) !=0 and len(list_crit) != 0:
+		var = func_del(list_obj,last_id)
+		var = var[1]
+		var2 = func_del(list_crit,last_id)
+		var2 = var2[1]
 		mistake=True
 
 	else:
 		var = table_obj
 		var2 = table_crit
 		mistake = False
+		
 
-	var2 = table_crit
+	
 	return var,var2,mistake
 
 
