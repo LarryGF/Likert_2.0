@@ -21,12 +21,23 @@
 				<md-tab id="main" md-label="Main">
 
 					<div>
+						<md-field>
+							<label>Users interviewed (amount)</label>
+							<md-input v-model="crit1" type="number"></md-input>
+						</md-field>
+
+						<md-button style="margin-left:45% " class="md-raised md-accent" @click="send(2,serv_existentes)">Check & Run</md-button>
+						<br>
+						<br>
+
 					<md-table @md-selected="onSelect" v-model="table_obj"  md-card md-fixed-header>
 						<md-table-toolbar>
 							<h1 class="md-title">Objectives</h1>
+							<span>
+							<md-button class="md-raised md-accent" @click="send(2,serv_existentes)">Delete</md-button>
 							<md-button class="md-raised md-primary" @click="send(2,serv_existentes)">Save</md-button>
-							
-							<md-button class="md-raised md-primary" @click="change('existentes')">New</md-button>
+							<md-button class="md-raised md-primary" @click="select='Objective'">New</md-button>
+						</span>
 						</md-table-toolbar>
 
 						<md-table-row md-selectable="multiple" md-auto-select slot="md-table-row" slot-scope="{ item }">
@@ -56,9 +67,11 @@
 					<md-table @md-selected="onSelect" v-model="table_crit"  md-card md-fixed-header>
 						<md-table-toolbar>
 							<h1 class="md-title">Criterion</h1>
+							<span>
+							<md-button  class="md-raised md-accent" @click="send(2,serv_existentes)">Delete</md-button>
 							<md-button class="md-raised md-primary" @click="send(2,serv_existentes)">Save</md-button>
-							
-							<md-button class="md-raised md-primary" @click="change('existentes')">New</md-button>
+							<md-button class="md-raised md-primary" @click="select='Criterion'">New</md-button>
+							</span>
 						</md-table-toolbar>
 
 						<md-table-row md-selectable="multiple" md-auto-select slot="md-table-row" slot-scope="{ item }">
@@ -79,6 +92,9 @@
 							<span><br>5: Very High Significance </span>
 
 						</h3>
+						<br>
+						<br>
+							
 					</div>
 
 
@@ -174,8 +190,8 @@
 
 					<br><br>
 					<span>
-					 <md-button class="md-raised md-primary">New</md-button>
-					  <md-button class="md-raised md-accent">Close</md-button>
+					 <md-button class="md-raised md-primary" @click="save(select,{'name':name,'category':category,'crit1':crit1,'crit2':crit2,'crit3':crit3,'crit4':crit4})">New</md-button>
+					  <md-button class="md-raised md-accent" @click="select=false,name='',category='',crit1='',crit2='',crit3='',crit4='',crit5=''">Close</md-button>
 					</span>
 					</md-tab>
 			</md-tabs>
