@@ -9,6 +9,14 @@ data_dir = os.path.join(os.path.abspath('.'),'data')
 
 
 eel.init('web')
+def to_list(dic,list_to_send):
+
+	lista = []
+	for fila in dic.keys():
+		lista.append(dic[fila])
+	list_to_send.append(lista)	
+	return lista
+
 
 @eel.expose
 def save(table,lista,last_id):
@@ -37,10 +45,8 @@ def load():
 		file = open(file)
 		dic = json.load(file)
 		file.close()
-		lista = []
-		for fila in dic.keys():
-			lista.append(dic[fila])
-		list_to_send.append(lista)
+		to_list(dic,list_to_send)
+		
 	except:
 		list_to_send.append([])
 
@@ -50,10 +56,7 @@ def load():
 		file = open(file)
 		dic = json.load(file)
 		file.close()
-		lista = []
-		for fila in dic.keys():
-			lista.append(dic[fila])
-		list_to_send.append(lista)
+		to_list(dic,list_to_send)
 	except:
 		list_to_send.append([])
 	
@@ -91,16 +94,27 @@ def delitems(lista,last_id):
 
 	
 	if str(lista[0]['id']) in objective.keys():
-		print(lista)
+		
 		for dic in lista:
 			print(dic['id'])
 			objective.pop(str(dic['id']))
 
-		return objective
+		objective = to_list(objective,[])
+		print(objective)
+
+		return 'objective',objective
 
 
 	elif str(lista[0]['id']) in criterion.keys():
-		print('criterion')
+
+		for dic in lista:
+			print(dic['id'])
+			criterion.pop(str(dic['id']))
+
+		criterion = to_list(criterion,[])
+		
+
+		return 'criterion',criterion
 
 	else:
 		return 'It seems like I screwed up, send me an email so I can fix it'
