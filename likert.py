@@ -93,22 +93,22 @@ def delitems(lista,last_id):
 	file.close()
 
 	
-	if str(lista[0]['id']) in objective.keys():
+	if len(lista) != 0 and str(lista[0]['id']) in objective.keys():
 		
 		for dic in lista:
-			print(dic['id'])
+			
 			objective.pop(str(dic['id']))
 
 		objective = to_list(objective,[])
-		print(objective)
+		
 
 		return 'objective',objective
 
 
-	elif str(lista[0]['id']) in criterion.keys():
+	elif len(lista) !=0 and str(lista[0]['id']) in criterion.keys():
 
 		for dic in lista:
-			print(dic['id'])
+			
 			criterion.pop(str(dic['id']))
 
 		criterion = to_list(criterion,[])
@@ -118,5 +118,88 @@ def delitems(lista,last_id):
 
 	else:
 		return 'It seems like I screwed up, send me an email so I can fix it'
+
+@eel.expose
+def check(users,table_obj,table_crit,last_id):
+	if users == 0 or users == None or users == '':
+		return "You must have at least one user"
+	list_obj = []
+	list_crit = []
+
+	for row in table_obj:
+		try:
+			int(row['crit1'])
+		except:
+			row['crit1']=0
+		try:
+			int(row['crit2'])
+		except:
+			row['crit2']=0
+		try:
+			int(row['crit3'])
+		except:
+			row['crit3']=0
+		try:
+			int(row['crit4'])
+		except:
+			row['crit4']=0
+		try:
+			int(row['crit5'])
+		except:
+			row['crit5']=0
+
+			
+
+		if int(row['crit1'])+int(row['crit2'])+int(row['crit3'])+int(row['crit4'])+int(row['crit5']) > int(users):
+			list_obj.append(row)
+		else:
+			pass
+
+
+	for row in table_crit:
+		try:
+			int(row['crit1'])
+		except:
+			row['crit1']=0
+		try:
+			int(row['crit2'])
+		except:
+			row['crit2']=0
+		try:
+			int(row['crit3'])
+		except:
+			row['crit3']=0
+		try:
+			int(row['crit4'])
+		except:
+			row['crit4']=0
+		try:
+			int(row['crit5'])
+		except:
+			row['crit5']=0
+
+		if int(row['crit1'])+int(row['crit2'])+int(row['crit3'])+int(row['crit4'])+int(row['crit5']) > int(users):
+			list_crit.append(row)
+		else:
+			pass
+	if len(list_obj) != 0:
+		var = delitems(list_obj,last_id)
+		var = var[1]
+		print(var)
+		mistake=True
+	elif len(list_crit) != 0:
+		var2 = delitems(list_crit,last_id)
+		var2 = var2[1]
+		print(var2)
+		mistake=True
+
+	else:
+		var = table_obj
+		var2 = table_crit
+		mistake = False
+
+	var2 = table_crit
+	return var,var2,mistake
+
 
 eel.start('likert1.html')
