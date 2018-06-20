@@ -16,14 +16,22 @@
 
 		<script type='text/javascript' src='/eel.js'></script>
 		<script type='text/javascript'>
+			
 		</script>
-<md-tabs class="md-primary" md-alignment="fixed">
+<md-tabs class="md-primary" md-alignment="fixed" @md-changed="load('objective','criterion')">
+				<md-tab id="info" md-label="Info">
+
+
+
+
+				</md-tab>
+
 				<md-tab id="main" md-label="Main">
 
 					<div>
 						<md-field>
 							<label>Users interviewed (amount)</label>
-							<md-input v-model="crit1" type="number"></md-input>
+							<md-input v-model="users" type="number"></md-input>
 						</md-field>
 
 						<md-button style="margin-left:45% " class="md-raised md-accent" @click="send(2,serv_existentes)">Check & Run</md-button>
@@ -35,7 +43,7 @@
 							<h1 class="md-title">Objectives</h1>
 							<span>
 							<md-button class="md-raised md-accent" @click="send(2,serv_existentes)">Delete</md-button>
-							<md-button class="md-raised md-primary" @click="send(2,serv_existentes)">Save</md-button>
+							<md-button class="md-raised md-primary" @click="save_to_file('objective',table_obj,last_id)">Save</md-button>
 							<md-button class="md-raised md-primary" @click="select='Objective'">New</md-button>
 						</span>
 						</md-table-toolbar>
@@ -69,7 +77,7 @@
 							<h1 class="md-title">Criterion</h1>
 							<span>
 							<md-button  class="md-raised md-accent" @click="send(2,serv_existentes)">Delete</md-button>
-							<md-button class="md-raised md-primary" @click="send(2,serv_existentes)">Save</md-button>
+							<md-button class="md-raised md-primary" @click="save_to_file('criterion',table_crit,last_id)">Save</md-button>
 							<md-button class="md-raised md-primary" @click="select='Criterion'">New</md-button>
 							</span>
 						</md-table-toolbar>
@@ -137,12 +145,7 @@
 
 
 				</md-tab>
-				<md-tab id="info" md-label="Info">
-
-
-
-
-				</md-tab>
+			
 			</md-tabs>
 				
 
@@ -190,7 +193,7 @@
 
 					<br><br>
 					<span>
-					 <md-button class="md-raised md-primary" @click="save(select,{'name':name,'category':category,'crit1':crit1,'crit2':crit2,'crit3':crit3,'crit4':crit4})">New</md-button>
+					 <md-button class="md-raised md-primary" @click="save(select,{'name':name,'category':category,'crit1':crit1,'crit2':crit2,'crit3':crit3,'crit4':crit4},last_id)">New</md-button>
 					  <md-button class="md-raised md-accent" @click="select=false,name='',category='',crit1='',crit2='',crit3='',crit4='',crit5=''">Close</md-button>
 					</span>
 					</md-tab>
@@ -203,7 +206,7 @@
 		<script src="node_modules/vue-material/dist/vue-material.min.js"></script>
 
 		<script src="node_modules/app.js"></script>
-
+		
 	</div>
 </body>
 
