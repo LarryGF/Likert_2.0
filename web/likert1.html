@@ -163,7 +163,7 @@
 				</md-tab>
 				<md-tab id="results" md-label="Results">
 				<div>
-					<md-table @md-selected="onSelect" v-model="likert_table_obj" md-sort="significance" md-card md-fixed-header>
+					<md-table @md-selected="onSelect" v-model="likert_table_obj" md-sort="Value" md-card md-fixed-header>
 						<md-table-toolbar>
 							<h1 class="md-title">Likert's Results: Objectives</h1>
 							
@@ -171,6 +171,7 @@
 
 						<md-table-row md-selectable="multiple" md-auto-select slot="md-table-row" slot-scope="{ item }">
 							<md-table-cell md-label="Significance" md-sort-by="significance">{{ item.significance }}</md-table-cell>
+							<md-table-cell md-label="Value" md-numeric>{{ item.value }}</md-table-cell>
 							<md-table-cell md-label="Objective">{{ item.name }}</md-table-cell>
 							<md-table-cell md-label="Category">{{ item.category }}</md-table-cell>
 													
@@ -179,7 +180,7 @@
 				</div>
 				<br>
 				<div>
-					<md-table @md-selected="onSelect" v-model="likert_table_crit" md-sort="significance" md-card md-fixed-header>
+					<md-table @md-selected="onSelect" v-model="likert_table_crit" md-sort="Value" md-card md-fixed-header>
 						<md-table-toolbar>
 							<h1 class="md-title">Likert's Results: Criterion</h1>
 							
@@ -187,7 +188,9 @@
 
 						<md-table-row md-selectable="multiple" md-auto-select slot="md-table-row" slot-scope="{ item }">
 							<md-table-cell md-label="Significance" md-sort-by="significance">{{ item.significance }}</md-table-cell>
-							<md-table-cell md-label="Objective">{{ item.name }}</md-table-cell>
+							<md-table-cell md-label="Value" md-numeric>{{ item.value }}</md-table-cell>
+							
+							<md-table-cell md-label="Criterion">{{ item.name }}</md-table-cell>
 													
 						</md-table-row>
 					</md-table>

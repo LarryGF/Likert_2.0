@@ -123,57 +123,19 @@ def func_check(users,table_obj,table_crit,last_id):
 	list_crit = []
 
 	for row in table_obj:
-		try:
-			int(row['crit1'])
-		except:
-			row['crit1']=0
-		try:
-			int(row['crit2'])
-		except:
-			row['crit2']=0
-		try:
-			int(row['crit3'])
-		except:
-			row['crit3']=0
-		try:
-			int(row['crit4'])
-		except:
-			row['crit4']=0
-		try:
-			int(row['crit5'])
-		except:
-			row['crit5']=0
-
-			
+		
+		row = check_existence(row)	
 
 		if int(row['crit1'])+int(row['crit2'])+int(row['crit3'])+int(row['crit4'])+int(row['crit5']) > int(users):
 			list_obj.append(row)
 		else:
+
 			pass
 
 
 	for row in table_crit:
-		try:
-			int(row['crit1'])
-		except:
-			row['crit1']=0
-		try:
-			int(row['crit2'])
-		except:
-			row['crit2']=0
-		try:
-			int(row['crit3'])
-		except:
-			row['crit3']=0
-		try:
-			int(row['crit4'])
-		except:
-			row['crit4']=0
-		try:
-			int(row['crit5'])
-		except:
-			row['crit5']=0
-
+		row = check_existence(row)
+		
 		if int(row['crit1'])+int(row['crit2'])+int(row['crit3'])+int(row['crit4'])+int(row['crit5']) > int(users):
 			list_crit.append(row)
 		else:
@@ -181,19 +143,26 @@ def func_check(users,table_obj,table_crit,last_id):
 
 	
 	if len(list_obj) != 0 and len(list_crit) == 0:
+		print('1')
 		var = func_del(list_obj,last_id)
 		var = var[1]
+		var2 = table_crit
 		print(var)
 		mistake=True
 		
 	elif len(list_crit) != 0 and len(list_obj) == 0:
+		print('2')
 		var2 = func_del(list_crit,last_id)
 		var2 = var2[1]
+		var = table_obj
 		print(var2)
 		mistake=True
 		
 
 	elif len(list_obj) !=0 and len(list_crit) != 0:
+		print('3')
+		print(list_crit)
+		print(list_obj)
 		var = func_del(list_obj,last_id)
 		var = var[1]
 		var2 = func_del(list_crit,last_id)
@@ -201,14 +170,35 @@ def func_check(users,table_obj,table_crit,last_id):
 		mistake=True
 
 	else:
+		print('4')
 		var = table_obj
 		var2 = table_crit
 		mistake = False
 		
-
+	print(var)
+	print(var2)
+	print('aqui')
 	
 	return var,var2,mistake
 
+def func_run(table_obj,table_crit,users):
+	list_to_send_obj = []
+	list_to_send_crit = []
+	limits = calculate_limits(users)
+	print(limits)
+	for objective in table_obj:
+		result = Likert_quant(objective)
+		result2 = Likert_qualit(result,limits)
+		dic = {"name":objective['name'],"value":result,"significance":result2,"category":objective['category'] }
+		list_to_send_obj.append(dic)
+	
+	for criterion in table_crit:
+		result = Likert_quant(criterion)
+		result2 = Likert_qualit(result,limits)
+		dic = {"name":criterion['name'],"value":result,"significance":result2,"category":criterion['category'] }
+		list_to_send_crit.append(dic)
+	
+	return list_to_send_obj,list_to_send_crit
 
 
 
@@ -216,6 +206,60 @@ def func_check(users,table_obj,table_crit,last_id):
 
 
 
+def Likert_quant(objective):
+
+	objective = check_existence(objective)
+	value1 = int(objective['crit1'])
+	value2 = int(objective['crit2'])
+	value3 = int(objective['crit3'])
+	value4 = int(objective['crit4'])
+	value5 = int(objective['crit5'])
+	total = 5*value5 + 4*value4 + 3*value3 + 2*value2 + value1
+	return total
+
+def Likert_qualit(result,limits):
+
+	if result < limits['second']:
+			return ('No Significance')
+
+	elif result < limits['third'] or result == limits['second']:
+		return ('Low Significance')
+
+	elif result < limits['fourth'] or result == limits['third']:
+		return ('Mild Significance')
+
+	elif result < limits['fifth'] or result == limits['fourth']:
+		return ('High Significance')
+
+	else:
+		return ('Very High Significance')
+
+
+
+
+def check_existence(row):
+	try:
+		int(row['crit1'])
+	except:
+		row['crit1']=0
+	try:
+		int(row['crit2'])
+	except:
+		row['crit2']=0
+	try:
+		int(row['crit3'])
+	except:
+		row['crit3']=0
+	try:
+		int(row['crit4'])
+	except:
+		row['crit4']=0
+	try:
+		int(row['crit5'])
+	except:
+		row['crit5']=0
+
+	return row
 
 
 
@@ -230,7 +274,7 @@ def func_check(users,table_obj,table_crit,last_id):
 
 
 def calculate_limits(exisiting_users):
-	val = len(exisiting_users)
+	val = exisiting_users
 	limits = {'first': val, 'second': val*2,
 			  'third': val*3, 'fourth': val*4, 'fifth': val*5}
 	return limits

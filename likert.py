@@ -26,6 +26,14 @@ def delitems(lista,last_id):
 def check(users,table_obj,table_crit,last_id):
 	result = func_check(users,table_obj,table_crit,last_id)
 	return result
+
+
+@eel.expose
+def run(table_obj,table_crit,users):
+	result = func_run(table_obj,table_crit,int(users))
+	
+	return result
+
 	
 
 eel.start('likert1.html')
