@@ -118,7 +118,7 @@ def func_del(lista,last_id):
 
 def func_check(users,table_obj,table_crit,last_id):
 	if users == 0 or users == None or users == '':
-		return "You must have at least one user"
+		return (0,0,1)
 	list_obj = []
 	list_crit = []
 	list_names = []
