@@ -82,6 +82,8 @@
 				<md-tab id="main" md-label="Main">
 
 					<div>
+
+						<div v-if="show">{{deleted_items}}</div>
 						
 						<md-field>
 							<label>Users interviewed (amount)</label>
@@ -257,6 +259,15 @@
 			</md-tabs>
 			</md-dialog-content>
 		</md-dialog>
+
+		<md-dialog-confirm
+      :md-active.sync="active"
+      md-title="Do you wanna continue?"
+      md-content="Some of the data you entered was invalid and we deleted it for you, do you wanna continue to run the software? If you choose to stay the names of the parameters we deleted will be shown until you decide to run the software again."
+      md-confirm-text="Run"
+      md-cancel-text="Stay"
+      @md-cancel="onCancel"
+      @md-confirm="onConfirm" />
 
 
 		<script src="node_modules/vue/dist/vue.min.js"></script>
