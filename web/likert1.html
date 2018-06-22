@@ -203,10 +203,10 @@
 				<md-tab id="summary" md-label="Summary">
 					<!-- <h1>Summary</h1> -->
 
-					<h2>Statistics by business' values (%)</h4>
+					<h2>Statistics by Objective</h4>
 
-					<div v-for="element in summary_list">
-						<h4> {{element.value}} </h4>
+					<div v-for="element in summary_list_obj">
+						<h4> {{element.name}} </h4>
 						<ul>
 							<li>No Significance: {{element.crit1}}</li>
 							<li>Low Significance: {{element.crit2}}</li>

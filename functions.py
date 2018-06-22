@@ -184,6 +184,7 @@ def func_check(users,table_obj,table_crit,last_id):
 def func_run(table_obj,table_crit,users):
 	list_to_send_obj = []
 	list_to_send_crit = []
+	list_to_send_sum_obj = []
 	limits = calculate_limits(users)
 	
 	for objective in table_obj:
@@ -197,8 +198,14 @@ def func_run(table_obj,table_crit,users):
 		result2 = Likert_qualit(result,limits)
 		dic = {"name":criterion['name'],"value":result,"significance":result2,"category":criterion['category'] }
 		list_to_send_crit.append(dic)
-	
-	return list_to_send_obj,list_to_send_crit
+
+	for objective in table_obj:
+		total = int(objective['crit1'])+ int(objective['crit2'])+ int(objective['crit3'])+ int(objective['crit4'])+ int(objective['crit5'])
+		dic = {'name':objective['name'],'crit1':str(round(int(objective['crit1'])/int(total)*100))+'%','crit2':str(round(int(objective['crit2'])/int(total)*100))+'%','crit3':str(round(int(objective['crit3'])/int(total)*100))+'%','crit4':str(round(int(objective['crit4'])/int(total)*100))+'%','crit5':str(round(int(objective['crit5'])/int(total)*100))+'%'}
+		list_to_send_sum_obj.append(dic)
+
+
+	return list_to_send_obj,list_to_send_crit,list_to_send_sum_obj
 
 def func_summary(values_list,likert_table_obj,users):
 	list_to_send = []
