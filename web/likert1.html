@@ -202,8 +202,14 @@
 				</md-tab>
 				<md-tab id="summary" md-label="Summary">
 					<!-- <h1>Summary</h1> -->
+					<div>
+					<h2>Statistics by Business' Values (%)</h2>
 
-					<h2>Statistics by Objective</h4>
+					<ul>
+						<li v-for="value in summary_list">{{ value.name}} : {{ value.value}} </li>
+					</ul>
+						
+					<h2>Statistics by Objective (%)</h4>
 
 					<div v-for="element in summary_list_obj">
 						<h4> {{element.name}} </h4>
@@ -215,6 +221,9 @@
 							<li>Very High Significance: {{element.crit5}}</li>
 						</ul>
 					</div>
+
+
+					<div>
 
  			
 				</md-tab>

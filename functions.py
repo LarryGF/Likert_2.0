@@ -242,8 +242,9 @@ def func_summary(values_list,likert_table_obj,users):
 			else:
 				pass
 
-		total = str(int(total)/int(max_value)*100) + '%'
-		dic[value] = total
+		total = str(round(int(total)/int(max_value)*100)) + '%'
+		dic['name'] = value
+		dic['value'] = total
 		list_to_send.append(dic)
 		dic = {}
 		total = 0
