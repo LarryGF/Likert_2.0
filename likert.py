@@ -7,8 +7,8 @@ eel.init('web')
 
 
 @eel.expose
-def save(table,lista,last_id):
-	result = func_save(table,lista,last_id)
+def save(table,lista,last_id,values_list):
+	result = func_save(table,lista,last_id,values_list)
 	return result
 	
 
@@ -34,6 +34,11 @@ def run(table_obj,table_crit,users):
 	
 	return result
 
+@eel.expose
+def summary(values_list,likert_table_obj):
+	result = func_summary(values_list,likert_table_obj)
+
+	return result
 	
 
 eel.start('likert1.html')

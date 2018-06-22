@@ -15,7 +15,7 @@ def to_list(dic,list_to_send):
 	return lista
 
 
-def func_save(table,lista,last_id):
+def func_save(table,lista,last_id,values_list):
 	dic = {}
 	file = os.path.join(data_dir,table+'.json')
 	file = open(file,'w')
@@ -28,6 +28,8 @@ def func_save(table,lista,last_id):
 		file2 = os.path.join(data_dir,'last.json')
 		file2 = open(file2,'w')
 		dic = {'last_id':last_id}
+		dic['values_list'] = values_list
+		print(dic)
 		json.dump(dic,file2)
 		return 'Success'
 	except Exception as e:
@@ -65,6 +67,7 @@ def func_load():
 		file.close()
 		last_id = dic['last_id']
 		list_to_send.append(last_id)
+		list_to_send.append(dic['values_list'])
 	except:
 		list_to_send.append(0)
 	return list_to_send
@@ -196,6 +199,46 @@ def func_run(table_obj,table_crit,users):
 		list_to_send_crit.append(dic)
 	
 	return list_to_send_obj,list_to_send_crit
+
+def func_summary(values_list,likert_table_obj):
+	list_to_send = []
+	total = 0
+	dic = {}
+
+	#sanitizing the values input, I don't know much javascript so it will be done here
+	new_values_list = []
+
+	while len(values_list) != 0:
+		value = values_list.pop()
+		if value not in values_list:
+			new_values_list.append(value)
+		else:
+			pass
+
+	print(new_values_list)
+	values_list = new_values_list
+
+	
+
+
+
+
+
+	for value in values_list:
+		for objective in likert_table_obj:
+			if objective['category'] == value:
+				total = total + int(objective['value'])
+				# likert_table_obj.pop(objective)
+			else:
+				pass
+
+		dic[value] = total
+		list_to_send.append(dic)
+		# list_to_send.remove(value)
+
+	print(list_to_send)
+
+
 
 
 

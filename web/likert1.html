@@ -67,6 +67,8 @@
 
 					<p> Last but not least, after you press the <b>'Check & Run'</b> button the software will perform a very basic check to see if all the data you passed was valid (it essentially checks if the amount of users you introduced in each row of the tables is bigger than the total of users interviewed, it's the only logical thing we can do to check the veracity of the data, because we already make sure that you can only fill the important fields with the appropriate data types). If a row doesn't pass this test, it will automatically be deleted and you'll be asked if you wanna continue doing the test or want to re-type the missing rows.<p>
 
+					<p> In the <b>Results</b> step the results are shown, if you are confortable with them you might want to save them by pressing the <b>'Save'</b> button. By design these values aren't automatically loaded at the start of the program, but in case you don't wanna run the software again and just wanna study your previously obtained results you can do this by clicking the <b>'Reload'</b> button, which will load the latest data you saved.</p>
+
 					<p>Finally, thanks for taking all the hard work of reading this guide, and we hope this software helps you do your job better, click on the button below to start.</p>
 
 
@@ -105,7 +107,7 @@
 						</md-table-toolbar>
 
 						<md-table-row md-selectable="multiple" md-auto-select slot="md-table-row" slot-scope="{ item }">
-							<md-table-cell md-label="Category">{{ item.category }}</md-table-cell>
+							<md-table-cell md-label="Value">{{ item.category }}</md-table-cell>
 							<md-table-cell md-label="Objective">{{ item.name }}</md-table-cell>
 							<md-table-cell md-label="1" md-numeric>{{ item.crit1 }}</md-table-cell>
 							<md-table-cell md-label="2" md-numeric>{{ item.crit2 }}</md-table-cell>
@@ -173,9 +175,9 @@
 
 						<md-table-row md-selectable="multiple" md-auto-select slot="md-table-row" slot-scope="{ item }">
 							<md-table-cell md-label="Significance">{{ item.significance }}</md-table-cell>
-							<md-table-cell md-label="Value"  md-sort-by="value" md-numeric>{{ item.value }}</md-table-cell>
+							<md-table-cell md-label="Total"  md-sort-by="value" md-numeric>{{ item.value }}</md-table-cell>
 							<md-table-cell md-label="Objective">{{ item.name }}</md-table-cell>
-							<md-table-cell md-label="Category">{{ item.category }}</md-table-cell>
+							<md-table-cell md-label="Value">{{ item.category }}</md-table-cell>
 													
 						</md-table-row>
 					</md-table>
@@ -190,7 +192,7 @@
 
 						<md-table-row md-selectable="multiple" md-auto-select slot="md-table-row" slot-scope="{ item }">
 							<md-table-cell md-label="Significance" >{{ item.significance }}</md-table-cell>
-							<md-table-cell md-label="Value" md-numeric md-sort-by="value">{{ item.value }}</md-table-cell>
+							<md-table-cell md-label="Total" md-numeric md-sort-by="value">{{ item.value }}</md-table-cell>
 							
 							<md-table-cell md-label="Criterion">{{ item.name }}</md-table-cell>
 													
@@ -199,10 +201,22 @@
 				</div>	
 				</md-tab>
 				<md-tab id="summary" md-label="Summary">
+					<!-- <h1>Summary</h1> -->
 
+					<h2>Statistics by business' values (%)</h4>
 
+					<div v-for="element in summary_list">
+						<h4> {{element.value}} </h4>
+						<ul>
+							<li>No Significance: {{element.crit1}}</li>
+							<li>Low Significance: {{element.crit2}}</li>
+							<li>Mild Significance: {{element.crit3}}</li>
+							<li>High Significance: {{element.crit4}}</li>
+							<li>Very High Significance: {{element.crit5}}</li>
+						</ul>
+					</div>
 
-
+ 			
 				</md-tab>
 			
 			</md-tabs>
@@ -214,38 +228,43 @@
 				<md-tab md-label="Create">
 					<h2 style="text-align: center;">Create new {{ select }}</h2>
 
-					<md-field>
+					<md-field md-clearable>
 						<label v-if="select == 'Objective'">Objective</label>
 						<label v-if="select == 'Criterion'">Criterion</label>
 						<md-textarea v-model="name" md-autogrow></md-textarea>
 					</md-field>
 
-					<md-field v-if="select == 'Objective'">
-						<label>Category</label>
+					<!-- <md-field md-clearable v-if="select == 'Objective'">
+						<label>Business' value</label>
 						<md-input v-model="category" ></md-input>
 					</md-field>
+					 -->
+
+					<md-autocomplete v-model="category" :md-options="values_list" :md-open-on-focus="false">
+					    <label>Business' value list</label>
+				    </md-autocomplete>
 					
-					<md-field>
+					<md-field md-clearable>
 						<label>No Significance (number of users)</label>
 						<md-input v-model="crit1" type="number"></md-input>
 					</md-field>
 					
-					<md-field>
+					<md-field md-clearable>
 						<label>Low Significance (number of users)</label>
 						<md-input v-model="crit2" type="number"></md-input>
 					</md-field>
 			
-					<md-field>
+					<md-field md-clearable>
 						<label>Mild Significance (number of users)</label>
 						<md-input v-model="crit3" type="number"></md-input>
 					</md-field>
 			
-					<md-field>
+					<md-field md-clearable>
 						<label>High Significance (number of users)</label>
 						<md-input v-model="crit4" type="number"></md-input>
 					</md-field>
 			
-					<md-field>
+					<md-field md-clearable>
 						<label>Very High Significance (number of users)</label>
 						<md-input v-model="crit5" type="number"></md-input>
 					</md-field>
