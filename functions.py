@@ -185,7 +185,7 @@ def func_run(table_obj,table_crit,users):
 	list_to_send_obj = []
 	list_to_send_crit = []
 	limits = calculate_limits(users)
-	print(limits)
+	
 	for objective in table_obj:
 		result = Likert_quant(objective)
 		result2 = Likert_qualit(result,limits)
@@ -215,17 +215,14 @@ def func_summary(values_list,likert_table_obj):
 		else:
 			pass
 
-	print(new_values_list)
-	values_list = new_values_list
-
 	
-
-
-
+	values_list = new_values_list
 
 
 	for value in values_list:
+		
 		for objective in likert_table_obj:
+			print(objective)
 			if objective['category'] == value:
 				total = total + int(objective['value'])
 				# likert_table_obj.pop(objective)
@@ -233,7 +230,9 @@ def func_summary(values_list,likert_table_obj):
 				pass
 
 		dic[value] = total
-		list_to_send.append(dic)
+		total = 0
+		
+	list_to_send.append(dic)
 		# list_to_send.remove(value)
 
 	print(list_to_send)
