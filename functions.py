@@ -200,10 +200,16 @@ def func_run(table_obj,table_crit,users):
 	
 	return list_to_send_obj,list_to_send_crit
 
-def func_summary(values_list,likert_table_obj):
+def func_summary(values_list,likert_table_obj,users):
 	list_to_send = []
 	total = 0
 	dic = {}
+	max_value = 0
+	#finding the total amount of points
+	for objective in likert_table_obj:
+		max_value = max_value + objective['value']
+
+
 
 	#sanitizing the values input, I don't know much javascript so it will be done here
 	new_values_list = []
@@ -218,24 +224,25 @@ def func_summary(values_list,likert_table_obj):
 	
 	values_list = new_values_list
 
-
+	#it wouldn't be a bad idea to optimize this code, by deleting the used objectives and values
 	for value in values_list:
 		
 		for objective in likert_table_obj:
-			print(objective)
+			
 			if objective['category'] == value:
 				total = total + int(objective['value'])
-				# likert_table_obj.pop(objective)
+
 			else:
 				pass
 
+		total = str(int(total)/int(max_value)*100) + '%'
 		dic[value] = total
+		list_to_send.append(dic)
+		dic = {}
 		total = 0
-		
-	list_to_send.append(dic)
-		# list_to_send.remove(value)
 
 	print(list_to_send)
+	return list_to_send
 
 
 

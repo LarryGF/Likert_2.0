@@ -35,9 +35,9 @@ def run(table_obj,table_crit,users):
 	return result
 
 @eel.expose
-def summary(values_list,likert_table_obj):
-	print(likert_table_obj)
-	result = func_summary(values_list,likert_table_obj)
+def summary(values_list,likert_table_obj,users):
+	
+	result = func_summary(values_list,likert_table_obj,users)
 
 	return result
 	
