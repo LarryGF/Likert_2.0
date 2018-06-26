@@ -185,6 +185,7 @@ def func_run(table_obj,table_crit,users):
 	list_to_send_obj = []
 	list_to_send_crit = []
 	list_to_send_sum_obj = []
+	list_to_send_sum_crit = []
 	limits = calculate_limits(users)
 	
 	for objective in table_obj:
@@ -204,8 +205,13 @@ def func_run(table_obj,table_crit,users):
 		dic = {'name':objective['name'],'crit1':str(round(int(objective['crit1'])/int(total)*100))+'%','crit2':str(round(int(objective['crit2'])/int(total)*100))+'%','crit3':str(round(int(objective['crit3'])/int(total)*100))+'%','crit4':str(round(int(objective['crit4'])/int(total)*100))+'%','crit5':str(round(int(objective['crit5'])/int(total)*100))+'%'}
 		list_to_send_sum_obj.append(dic)
 
+	for criterion in table_crit:
+		total = int(criterion['crit1'])+ int(criterion['crit2'])+ int(criterion['crit3'])+ int(criterion['crit4'])+ int(criterion['crit5'])
+		dic = {'name':criterion['name'],'crit1':str(round(int(criterion['crit1'])/int(total)*100))+'%','crit2':str(round(int(criterion['crit2'])/int(total)*100))+'%','crit3':str(round(int(criterion['crit3'])/int(total)*100))+'%','crit4':str(round(int(criterion['crit4'])/int(total)*100))+'%','crit5':str(round(int(criterion['crit5'])/int(total)*100))+'%'}
+		list_to_send_sum_crit.append(dic)
 
-	return list_to_send_obj,list_to_send_crit,list_to_send_sum_obj
+
+	return list_to_send_obj,list_to_send_crit,list_to_send_sum_obj,list_to_send_sum_crit
 
 def func_summary(values_list,likert_table_obj,users):
 	list_to_send = []

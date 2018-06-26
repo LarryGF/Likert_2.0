@@ -142,12 +142,12 @@
 					</md-table>
 						<h3>Judgement:
 						</h3>
-							<span><br><b>1:</b> No Significance </span>
+							<span><b>1:</b> No Significance </span>
 							<span><b>2:</b> Low Significance </span>
 							<span><b>3:</b> Mild Significance </span>
 							<span><b>4:</b> High Significance </span>
 							<span><b>5:</b> Very High Significance </span>
-
+<br>
 					</div>
 
 
@@ -174,12 +174,12 @@
 						</md-table-row>
 					</md-table>
 						<h3>Judgement:</h3>
-							<span><br>1: No Significance </span>
+							<span>1: No Significance </span>
 							<span><b>2:</b> Low Significance </span>
 							<span><b>3:</b> Mild Significance </span>
 							<span><b>4:</b> High Significance </span>
 							<span><b>5:</b> Very High Significance </span>
-
+<br>
 						
 						<br>
 						<br>
@@ -226,12 +226,27 @@
 				<md-tab id="summary" md-label="Summary">
 					<!-- <h1>Summary</h1> -->
 					<div>
-					<h2>Statistics by Business' Values (%)</h2>
+					<h2>Total Statistics by Business' Values (%)</h2>
 
 					<ul>
 						<li v-for="value in summary_list">{{ value.name}} : {{ value.value}} </li>
 					</ul>
-						
+
+
+					<br><br>
+					<h2>Statistics by Businesss' Values (%)</h4>
+
+					<div v-for="element in summary_list_crit">
+						<h4> {{element.name}} </h4>
+						<ul>
+							<li>No Significance: {{element.crit1}}</li>
+							<li>Low Significance: {{element.crit2}}</li>
+							<li>Mild Significance: {{element.crit3}}</li>
+							<li>High Significance: {{element.crit4}}</li>
+							<li>Very High Significance: {{element.crit5}}</li>
+						</ul>
+					</div>
+					<br><br>
 					<h2>Statistics by Objective (%)</h4>
 
 					<div v-for="element in summary_list_obj">
