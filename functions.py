@@ -237,7 +237,7 @@ def func_summary(values_list,likert_table_obj,users):
 	
 	values_list = new_values_list
 
-	sanitize(values_list)
+	
 
 	#it wouldn't be a bad idea to optimize this code, by deleting the used objectives and values
 	for value in values_list:
@@ -257,12 +257,18 @@ def func_summary(values_list,likert_table_obj,users):
 		dic = {}
 		total = 0
 
-	print(list_to_send)
+	list_to_send= sanitize(list_to_send)
 	return list_to_send
 
 
 
-def sanitize(new_values_list):
+def sanitize(list_to_send):
+	new_values_list = []
+	for value in list_to_send:
+		if value['value'] != '0%': 
+			new_values_list.append(value['name'])
+		else:
+			pass
 
 	dic = {}
 	file2 = os.path.join(data_dir,'last.json')
@@ -275,6 +281,7 @@ def sanitize(new_values_list):
 	file2 = open(file2,'w')
 	json.dump(dic,file2)
 	file2.close()
+	return list_to_send
 
 
 
