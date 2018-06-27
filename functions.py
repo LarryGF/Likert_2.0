@@ -29,7 +29,7 @@ def func_save(table,lista,last_id,values_list):
 		file2 = open(file2,'w')
 		dic = {'last_id':last_id}
 		dic['values_list'] = values_list
-		print(dic)
+		
 		json.dump(dic,file2)
 		return 'Success'
 	except Exception as e:
@@ -149,19 +149,15 @@ def func_check(users,table_obj,table_crit,last_id):
 
 	
 	if len(list_obj) != 0 and len(list_crit) == 0:
-		print('1')
 		var = func_del(list_obj,last_id)
 		var = var[1]
 		var2 = table_crit
-		print(var)
 		mistake=True
 		
 	elif len(list_crit) != 0 and len(list_obj) == 0:
-		print('2')
 		var2 = func_del(list_crit,last_id)
 		var2 = var2[1]
 		var = table_obj
-		print(var2)
 		mistake=True
 		
 
