@@ -6,13 +6,17 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="node_modules/vue-material/dist/vue-material.css">
 	<link rel="stylesheet" href="node_modules/vue-material/dist/theme/black-green-light.css">
+	<style>
+	.md-menu-content{
+		z-index:12;
+	}
+	</style>
 
 </head>
 
 <body>
 
 	<div id='app'>
-
 
 		<script type='text/javascript' src='/eel.js'></script>
 		<script type='text/javascript'>
@@ -234,7 +238,7 @@
 
 
 					<br><br>
-					<h2>Statistics by Businesss' Values (%)</h4>
+					<h2>Statistics by Business Success Criterions (%)</h4>
 
 					<div v-for="element in summary_list_crit">
 						<h4> {{element.name}} </h4>
@@ -288,7 +292,7 @@
 					 -->
 
 					<md-autocomplete v-if="select == 'Objective'" v-model="category" :md-options="values_list" :md-open-on-focus="false">
-					    <label>Business' value list</label>
+					    <label>Business' value</label>
 				    </md-autocomplete>
 					
 					<md-field md-clearable>
