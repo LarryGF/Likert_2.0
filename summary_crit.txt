@@ -1,0 +1,18 @@
+El proyecto es completado en tiempo.
+20%
+30%
+5%
+40%
+5%
+El proyecto es completado con el presupuesto asignado.
+25%
+10%
+45%
+20%
+0%
+Se cumplen los Requerimientos Funcionales.
+26%
+30%
+4%
+9%
+30%
